@@ -9,6 +9,10 @@
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
 
+# start gnome-settings-daemon to get some gnome goodies
+exec /usr/libexec/gnome-settings-daemon
+exec /usr/bin/gnome-session
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
@@ -31,12 +35,13 @@ bindsym $mod+Shift+q kill
 bindsym $mod+q kill
 
 # brightness keys
-bindsym F6 exec brightness down
-bindsym F7 exec brightness up
+bindsym F6 exec /usr/local/bin/change-brightness.sh -100
+bindsym F7 exec /usr/local/bin/change-brightness.sh 100
 
 # volume keys
-bindsym F9 exec volume down
-bindsym F10 exec volume up
+bindsym F8 exec amixer -D pulse sset Master 0%
+bindsym F9 exec amixer -D pulse sset Master 5%-
+bindsym F10 exec amixer -D pulse sset Master 5%+
 
 # focus on mouse
 focus_follows_mouse no
